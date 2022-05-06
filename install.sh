@@ -1,6 +1,8 @@
 dotfiledir="$(dirname "$(realpath "$0")")"
+echo "dotfiles in $dotfiledir"
 
 echo "Installing Go...\n"
+curl -OL https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
 PATH=$PATH:/usr/local/go/bin
 echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
@@ -16,13 +18,13 @@ sudo go install -mod=readonly ./cmd/tailscaled ./cmd/tailscale
 sudo apt-get update
 sudo apt-get install -y curl gpg dnsutils
 sudo cp "$dotfiledir"/scripts/tailscaled /etc/init.d
-sudo cp /go/bin/tailscaled /usr/sbin/tailscaled
-sudo cp /go/bin/tailscale /usr/bin/tailscale
+sudo cp /usr/local/go/bin/tailscaled /usr/sbin/tailscaled
+sudo cp /usr/local/go/bin/tailscale /usr/bin/tailscale
 sudo mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 echo "done"
 
 echo "Installing VNC...\n"
-exec "$dotfiledir"/scripts/desktop-lite-debian.sh
+sudo exec "$dotfiledir"/scripts/desktop-lite-debian.sh
 echo "done"
 
 echo 'sudo service ssh status > /dev/null || service ssh start' >> $HOME/.profile
