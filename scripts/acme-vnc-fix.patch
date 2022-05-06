@@ -1,0 +1,14 @@
+diff --git a/src/cmd/devdraw/x11-screen.c b/src/cmd/devdraw/x11-screen.c
+index 0bbc25d6..b89080ee 100644
+--- a/src/cmd/devdraw/x11-screen.c
++++ b/src/cmd/devdraw/x11-screen.c
+@@ -586,7 +586,8 @@ xattach(Client *client, char *label, char *winsize)
+ 		0,		/* border width */
+ 		_x.depth,	/* depth */
+ 		InputOutput,	/* class */
+-		_x.vis,		/* visual */
++//		_x.vis,		/* visual */
++		CopyFromParent,		/* visual */
+ 				/* valuemask */
+ 		CWBackPixel|CWBorderPixel|CWColormap,
+ 		&attr		/* attributes (the above aren't?!) */
