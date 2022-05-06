@@ -1,8 +1,14 @@
 dotfiledir="$(dirname "$(realpath "$0")")"
 
+echo "Installing Go...\n"
+sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+PATH=$PATH:/usr/local/go/bin
+echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
+echo "done" 
+
 echo "Installing Tailscale...\n"
-mkdir -p /go/src/tailscale
-cd /go/src/tailscale
+mkdir -p /usr/local/go/src/tailscale
+cd /usr/local/go/src/tailscale
 git clone https://github.com/tailscale/tailscale.git
 cd tailscale
 go mod downloads
@@ -19,8 +25,8 @@ echo "Installing VNC...\n"
 exec "$dotfiledir"/scripts/desktop-lite-debian.sh
 echo "done"
 
-echo 'sudo service ssh status > /dev/null || service ssh start' >> /home/vscode/.bashrc
-echo 'sudo service tailscaled status > /dev/null || service tailscaled start' >> /home/vscode/.bashrc
+echo 'sudo service ssh status > /dev/null || service ssh start' >> $HOME/.profile
+echo 'sudo service tailscaled status > /dev/null || service tailscaled start' >> $HOME/.profile
 
 echo "Installing Acme...\n"
 sudo apt-get install -y xorg-dev mosh
@@ -31,5 +37,5 @@ git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
 sh INSTALL
 echo "done"
 
-echo 'export PLAN9=/usr/local/plan9' >> /home/vscode/.bashrc
-echo 'export PATH=$PATH:$PLAN9/bin' >> /home/vscode/.bashrc
+echo 'export PLAN9=/usr/local/plan9' >> $HOME/.profile
+echo 'export PATH=$PATH:$PLAN9/bin' >> $HOME/.profile
