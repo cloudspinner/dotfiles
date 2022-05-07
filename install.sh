@@ -4,19 +4,19 @@ echo "dotfiles in $dotfiledir"
 echo "Installing Go...\n"
 curl -OL https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
-PATH=$PATH:/usr/local/go/bin
+gobin=/usr/local/go/bin
 echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
 echo "done" 
 
 echo "Installing Tailscale...\n"
-mkdir -p /usr/local/go/src/tailscale
+sudo mkdir -p /usr/local/go/src/tailscale
 cd /usr/local/go/src/tailscale
-git clone https://github.com/tailscale/tailscale.git
+sudo git clone https://github.com/tailscale/tailscale.git
 cd tailscale
-go mod downloads
-sudo go install -mod=readonly ./cmd/tailscaled ./cmd/tailscale
+$gobin/go mod downloads
+sudo $gobin/go install -mod=readonly ./cmd/tailscaled ./cmd/tailscale
 sudo apt-get update
-sudo apt-get install -y curl gpg dnsutils
+sudo apt-get install -y gpg dnsutils
 sudo cp "$dotfiledir"/scripts/tailscaled /etc/init.d
 sudo cp /usr/local/go/bin/tailscaled /usr/sbin/tailscaled
 sudo cp /usr/local/go/bin/tailscale /usr/bin/tailscale
@@ -31,12 +31,12 @@ echo 'sudo service ssh status > /dev/null || service ssh start' >> $HOME/.profil
 echo 'sudo service tailscaled status > /dev/null || service tailscaled start' >> $HOME/.profile
 
 echo "Installing Acme...\n"
-sudo apt-get install -y xorg-dev mosh
+sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
 cd /usr/local
-git clone https://github.com/9fans/plan9port plan9
+sudo git clone https://github.com/9fans/plan9port plan9
 cd plan9
-git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
-sh INSTALL
+sudo git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
+sudo sh INSTALL
 echo "done"
 
 echo 'export PLAN9=/usr/local/plan9' >> $HOME/.profile
