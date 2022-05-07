@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 dotfiledir="$(dirname "$(realpath "$0")")"
 echo "dotfiles in $dotfiledir"
 
@@ -17,18 +18,23 @@ $gobin/go mod downloads
 sudo $gobin/go install -mod=readonly ./cmd/tailscaled ./cmd/tailscale
 sudo apt-get update
 sudo apt-get install -y gpg dnsutils
-sudo cp "$dotfiledir"/scripts/tailscaled /etc/init.d
+sudo cp "$dotfiledir"/scripts/tailscaled /etc/init.d # todo: use curl to get tailscaled?
 sudo cp /usr/local/go/bin/tailscaled /usr/sbin/tailscaled
 sudo cp /usr/local/go/bin/tailscale /usr/bin/tailscale
 sudo mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 echo "done"
 
 echo "Installing VNC...\n"
-sudo exec "$dotfiledir"/scripts/desktop-lite-debian.sh
+sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get script?
+echo "done"
+
+echo "Installing ssh..."
+curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $VSCODE_PASSW
 echo "done"
 
 echo 'sudo service ssh status > /dev/null || service ssh start' >> $HOME/.profile
-echo 'sudo service tailscaled status > /dev/null || service tailscaled start' >> $HOME/.profile
+echo 'sudo tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &' >> $HOME/.profile
+echo 'sudo tailscale up --authkey=$TAILSCALE_AUTHKEY' >> $HOME/.profile
 
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
