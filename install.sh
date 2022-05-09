@@ -33,7 +33,7 @@ echo "Installing ssh..."
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $VSCODE_PASSW
 echo "done"
 
-echo 'sudo service ssh status > /dev/null || sudo service ssh start' >> /etc/profile
+echo 'sudo sudo service ssh start' >> /etc/profile
 echo 'sudo tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &' >> /etc/profile
 echo 'sudo tailscale up --authkey=$TAILSCALE_AUTHKEY' >> /etc/profile
 
