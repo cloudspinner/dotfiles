@@ -6,7 +6,7 @@ echo "Installing Go...\n"
 curl -OL https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
 gobin=/usr/local/go/bin
-echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
+echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
 echo "done"
 
 echo "Installing Tailscale...\n"
@@ -26,16 +26,16 @@ echo "done"
 
 echo "Installing VNC...\n"
 sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get script?
-echo 'sudo /usr/local/share/desktop-init.sh' >> $HOME/.profile
+echo 'sudo /usr/local/share/desktop-init.sh' >> /etc/profile
 echo "done"
 
 echo "Installing ssh..."
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $VSCODE_PASSW
 echo "done"
 
-echo 'sudo service ssh status > /dev/null || sudo service ssh start' >> $HOME/.profile
-echo 'tailscale status > /dev/null || sudo tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &' >> $HOME/.profile
-echo 'tailscale status > /dev/null || sudo tailscale up --authkey=$TAILSCALE_AUTHKEY' >> $HOME/.profile
+echo 'sudo service ssh status > /dev/null || sudo service ssh start' >> /etc/profile
+echo 'sudo tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &' >> /etc/profile
+echo 'sudo tailscale up --authkey=$TAILSCALE_AUTHKEY' >> /etc/profile
 
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
@@ -46,5 +46,5 @@ sudo git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
 sudo sh INSTALL
 echo "done"
 
-echo 'export PLAN9=/usr/local/plan9' >> $HOME/.profile
-echo 'export PATH=$PATH:$PLAN9/bin' >> $HOME/.profile
+echo 'export PLAN9=/usr/local/plan9' >> /etc/profile
+echo 'export PATH=$PATH:$PLAN9/bin' >> /etc/profile
