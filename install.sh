@@ -38,6 +38,21 @@ sudo git clone https://github.com/9fans/plan9port plan9
 cd plan9
 sudo git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
 sudo sh INSTALL
+mkdir /home/vscode/.local/bin
+cp "$dotfiledir"/scripts/acme/bin/* /home/vscode/.local/bin
+cat << EOF >> /home/vscode/.bashrc
+## If inside Acme...
+if [ "$winid" ]; then
+  ## ... then patch the `cd` command
+  _cd () {
+    \cd "$@" && awd
+  }
+  alias cd=_cd
+  PS1='$ '
+  alias ls="ls --color=never"
+  alias lf="lc -F"
+fi
+EOF
 echo "done"
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
