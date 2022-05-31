@@ -38,6 +38,8 @@ sudo git clone https://github.com/9fans/plan9port plan9
 cd plan9
 sudo git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
 sudo sh INSTALL
+echo 'export PLAN9=/usr/local/plan9' >> /home/vscode/.profile
+echo 'export PATH=$PATH:$PLAN9/bin' >> /home/vscode/.profile
 mkdir /home/vscode/.local/bin
 cp "$dotfiledir"/scripts/acme/bin/* /home/vscode/.local/bin
 cat << EOF >> /home/vscode/.bashrc
@@ -53,6 +55,11 @@ if [ "$winid" ]; then
   alias lf="lc -F"
 fi
 EOF
+# Make sure PATH from profile (including the PLAN9 commands)
+# is used by non-interactive ssh login (e.g. when using sam -r)
+mkdir /home/vscode/.ssh
+echo 'BASH_ENV=/home/vscode/.profile' > /home/vscode/.ssh/environment
+chmod 600 /home/vscode/.ssh/environment
 echo "done"
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
