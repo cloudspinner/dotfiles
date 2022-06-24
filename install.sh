@@ -44,10 +44,10 @@ mkdir /home/vscode/.local/bin
 cp "$dotfiledir"/scripts/acme/bin/* /home/vscode/.local/bin
 cat << EOF >> /home/vscode/.bashrc
 ## If inside Acme...
-if [ "$winid" ]; then
+if [ \${winid} ]; then
   ## ... then patch the `cd` command
   _cd () {
-    \cd "$@" && awd
+    \cd \${@} && awd
   }
   alias cd=_cd
   PS1='$ '
