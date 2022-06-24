@@ -28,7 +28,7 @@ sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get s
 echo "done"
 
 echo "Installing ssh..."
-curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $VSCODE_PASSW
+curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $SSH_PASSW
 echo "done"
 
 echo "Installing Acme...\n"
