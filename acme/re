@@ -1,0 +1,11 @@
+#!/bin/sh
+# re:	evaluate a clojure expression in the active nrepl session.
+# If the expression is not given as an argument, the selected text
+# in the current acme window is used. The selection is extended
+# with one character on either side.
+
+case $# in
+	0)	acmepa | acmenrepl;;
+	1)	echo $1 | acmenrepl;;
+	*)	echo 'Usage: re ['\''clojure expression'\'] 1>&2; exit 2
+esac

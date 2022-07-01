@@ -1,0 +1,13 @@
+#!/bin/sh
+# rf:	format a clojure expression in the active nrepl session.
+# If the expression is not given as an argument, the selected text
+# in the current acme window is used. The selection is extended
+# with one character on either side.
+
+nreplcmd="gonrepl -o format-code"
+
+case $# in
+	0)	acmepa | $nreplcmd | acmera;;
+	1)	acmepa -n 0 | $nreplcmd | acmera -n 0;;
+	*)	echo 'Usage: rf ['\''clojure expression'\'] 1>&2; exit 2;;
+esac

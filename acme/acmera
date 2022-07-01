@@ -1,0 +1,20 @@
+#!/bin/sh
+# acmera: replace the text 'around' the selection in the active acme
+# window by extending it first with an optional number of extra
+# characters on each side (default: 1).
+
+charcnt=#1
+
+case $1 in
+-n)	shift; charcnt=#$1; shift;;
+esac
+
+case $# in
+0|1)	newtext=`cat $1`;;
+*)	echo 'Usage: acmera [-n num] [file]' 1>&2; exit 1;;
+esac
+
+acmeaddr | awk -F, '{ printf "%s-'$charcnt',%s+'$charcnt'", $1, $2}' | 9p write acme/$winid/addr
+printf "%s" "$newtext" | 9p write acme/$winid/data
+
+

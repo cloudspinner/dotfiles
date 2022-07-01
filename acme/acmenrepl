@@ -1,0 +1,15 @@
+#!/bin/sh
+# acmenrepl:	Read and evaluate a clojure expression from stdin.
+case $# in
+	0)	;;
+	*)	echo 'Usage: | acmenrepl' 1>&2; exit 2
+esac
+
+portfile=$HOME/.nrepl-port
+test -f $portfile || (echo $portfile not found, repl not running?; exit 1)
+
+port=`cat $portfile`
+sessionfile=$HOME/.nrepl-session$port
+test -f $sessionfile || (echo "" | gonrepl -a localhost:$port -clone=true > $sessionfile)
+
+cat | gonrepl -a localhost:$port -s `cat $sessionfile`
