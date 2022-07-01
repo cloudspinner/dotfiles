@@ -62,4 +62,9 @@ echo 'BASH_ENV=/home/vscode/.profile' > /home/vscode/.ssh/environment
 chmod 600 /home/vscode/.ssh/environment
 echo "done"
 
+## Install dependencies for acme scripts:
+go install github.com/cloudspinner/gonrepl@latest
+go install github.com/cloudspinner/acemaddr@latest
+echo 'export PATH=$PATH:$HOME/go/bin' >> /home/vscode/.profile
+
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
