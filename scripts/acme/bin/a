@@ -24,4 +24,4 @@ fi
 # In `win`, Node.js REPL looks nicer without ANSI codes
 export NODE_NO_READLINE=1
 
-acme -a -f /mnt/font/Menlo-Regular/12a/font $1
+acme -a -f /mnt/font/'Go Mono'/12a/font -l acme.dump
