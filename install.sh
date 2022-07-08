@@ -67,4 +67,10 @@ go install github.com/cloudspinner/gonrepl@latest
 go install github.com/cloudspinner/acemaddr@latest
 echo 'export PATH=$PATH:$HOME/go/bin' >> /home/vscode/.profile
 
+echo "Installing Go fonts..."
+git clone https://go.googlesource.com/image /home/vscode
+mkdir -p /home/vscode/.fonts
+cp /home/vscode/image/font/gofont/ttfs/*.ttf /home/vscode/.fonts
+sudo fc-cache -f -v
+
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
