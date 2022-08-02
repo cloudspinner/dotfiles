@@ -40,7 +40,7 @@ sudo git apply "$dotfiledir"/scripts/acme-vnc-fix.patch
 sudo sh INSTALL
 echo 'export PLAN9=/usr/local/plan9' >> /home/vscode/.profile
 echo 'export PATH=$PATH:$PLAN9/bin' >> /home/vscode/.profile
-mkdir /home/vscode/.local/bin
+mkdir -p /home/vscode/.local/bin
 cp "$dotfiledir"/scripts/acme/bin/* /home/vscode/.local/bin
 cat << EOF >> /home/vscode/.bashrc
 ## If inside Acme...
@@ -63,13 +63,14 @@ chmod 600 /home/vscode/.ssh/environment
 echo "done"
 
 ## Install dependencies for acme scripts:
-go install github.com/cloudspinner/gonrepl@latest
-go install github.com/cloudspinner/acemaddr@latest
+$gobin/go install github.com/cloudspinner/gonrepl@latest
+$gobin/go install github.com/cloudspinner/acmeaddr@latest
 echo 'export PATH=$PATH:$HOME/go/bin' >> /home/vscode/.profile
 
 echo "Installing Go fonts..."
+sudo apt-get install -y fontconfig
 git clone https://go.googlesource.com/image /home/vscode
-mkdir -p /home/vscode/.fonts
+mkdir /home/vscode/.fonts
 cp /home/vscode/image/font/gofont/ttfs/*.ttf /home/vscode/.fonts
 sudo fc-cache -f -v
 
