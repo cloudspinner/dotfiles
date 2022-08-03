@@ -68,10 +68,17 @@ $gobin/go install github.com/cloudspinner/acmeaddr@latest
 echo 'export PATH=$PATH:$HOME/go/bin' >> /home/vscode/.profile
 
 echo "Installing Go fonts..."
-sudo apt-get install -y fontconfig
-git clone https://go.googlesource.com/image /home/vscode
-mkdir /home/vscode/.fonts
+cd /home/vscode
+git clone https://go.googlesource.com/image
+mkdir .fonts
 cp /home/vscode/image/font/gofont/ttfs/*.ttf /home/vscode/.fonts
+
+echo "Installing Source Code Pro font..."
+cd .fonts
+curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceCodePro-Regular.ttf"
+
+echo "Updating font cache..."
+#sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
