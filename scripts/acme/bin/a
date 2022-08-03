@@ -25,7 +25,11 @@ fi
 export NODE_NO_READLINE=1
 
 acme -a -l acme.dump \
-	# -f /mnt/font/LucidaGrande/12a/font \
 	-f /mnt/font/GoRegular/12a/font \
-	# -F /mnt/font/SourceCodeProRoman-Regular/12a/font
 	-F /mnt/font/SourceCodePro-Regular/12a/font
+
+# On Mac I prefer:
+# acme -a -l acme.dump \
+#	-f /mnt/font/LucidaGrande/12a/font \
+#	-F /mnt/font/SourceCodeProRoman-Regular/12a/font
+
