@@ -27,15 +27,27 @@ echo "Installing VNC...\n"
 sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get script?
 echo "done"
 
-echo "Installing ssh..."
+echo "Installing ssh...\n"
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $SSH_PASSW
 echo "done"
 
-echo "Installing clj-kondo..."
+echo "Installing clj-kondo...\n"
 cd /usr/local
 curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
 chmod +x install-clj-kondo
 sudo ./install-clj-kondo
+echo "done"
+
+echo "Installing tmux+neovim+conjure...\n"
+cd /home/vscode
+sudo apt-get install -y tmux nvim python3-pip
+# Set nvim as the default vim command
+sudo update-alternatives --config vim
+pip3 install --upgrade msgpack
+sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+mkdir -p /home/vscode/.config/nvim
+cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
 echo "done"
 
 echo "Installing Acme...\n"
@@ -74,30 +86,18 @@ $gobin/go install github.com/cloudspinner/gonrepl@latest
 $gobin/go install github.com/cloudspinner/acmeaddr@latest
 echo 'export PATH=$PATH:$HOME/go/bin' >> /home/vscode/.profile
 
-echo "Installing Go fonts..."
+echo "Installing Go fonts...\n"
 cd /home/vscode
 git clone https://go.googlesource.com/image
 mkdir .fonts
 cp /home/vscode/image/font/gofont/ttfs/*.ttf /home/vscode/.fonts
 
-echo "Installing Source Code Pro font..."
+echo "Installing Source Code Pro font...\n"
 cd .fonts
 curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceCodePro-Regular.ttf"
 
-echo "Updating font cache..."
+echo "Updating font cache...\n"
 #sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
-
-echo "Installing tmux+neovim+conjure\n"
-cd /home/vscode
-sudo apt-get install -y tmux nvim python3-pip
-# Set nvim as the default vim command
-sudo update-alternatives --config vim
-pip3 install --upgrade msgpack
-sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-mkdir -p /home/vscode/.config/nvim
-cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
-echo "done"
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
