@@ -3,8 +3,8 @@ dotfiledir="$(dirname "$(realpath "$0")")"
 echo "dotfiles in $dotfiledir"
 
 echo "Installing Go...\n"
-curl -OL https://go.dev/dl/go1.18.1.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz
+curl -OL https://go.dev/dl/go1.19.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz
 gobin=/usr/local/go/bin
 echo "done"
 
@@ -38,17 +38,17 @@ sudo chmod +x install-clj-kondo
 sudo ./install-clj-kondo
 echo "done"
 
-## echo "Installing tmux+neovim+conjure...\n"
-## cd /home/vscode
-## sudo apt-get install -y tmux neovim python3-pip
+echo "Installing tmux+neovim+conjure...\n"
+cd /home/vscode
+sudo apt-get install -y tmux neovim python3-pip
 # Set nvim as the default vim command
-## sudo update-alternatives --config vim
-## pip3 install --upgrade msgpack
-## sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-##       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-## mkdir -p /home/vscode/.config/nvim
-## cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
-## echo "done"
+sudo update-alternatives --config vim
+pip3 install --upgrade msgpack
+sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+mkdir -p /home/vscode/.config/nvim
+cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
+echo "done"
 
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
