@@ -31,6 +31,13 @@ echo "Installing ssh..."
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $SSH_PASSW
 echo "done"
 
+echo "Installing clj-kondo..."
+cd /usr/local
+curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
+chmod +x install-clj-kondo
+sudo ./install-clj-kondo
+echo "done"
+
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
 cd /usr/local
@@ -80,5 +87,17 @@ curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceC
 echo "Updating font cache..."
 #sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
+
+echo "Installing tmux+neovim+conjure\n"
+cd /home/vscode
+sudo apt-get install -y tmux nvim python3-pip
+# Set nvim as the default vim command
+sudo update-alternatives --config vim
+pip3 install --upgrade msgpack
+sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+mkdir -p /home/vscode/.config/nvim
+cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
+echo "done"
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
