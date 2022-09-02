@@ -33,14 +33,14 @@ echo "done"
 
 echo "Installing clj-kondo...\n"
 cd /usr/local
-curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
-chmod +x install-clj-kondo
+sudo curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
+sudo chmod +x install-clj-kondo
 sudo ./install-clj-kondo
 echo "done"
 
 echo "Installing tmux+neovim+conjure...\n"
 cd /home/vscode
-sudo apt-get install -y tmux nvim python3-pip
+sudo apt-get install -y tmux neovim python3-pip
 # Set nvim as the default vim command
 sudo update-alternatives --config vim
 pip3 install --upgrade msgpack
