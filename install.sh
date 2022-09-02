@@ -45,7 +45,7 @@ echo "done"
 ## sudo update-alternatives --config vim
 ## pip3 install --upgrade msgpack
 ## sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+##       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ## mkdir -p /home/vscode/.config/nvim
 ## cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
 ## echo "done"
