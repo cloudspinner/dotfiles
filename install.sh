@@ -31,6 +31,17 @@ echo "Installing ssh...\n"
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $SSH_PASSW
 echo "done"
 
+# Build latest mosh release, to play nice with Neovim colors
+echo "Install mosh...\n"
+sudo apt-get install -y libtinfo-dev libssl-dev protobuf-dev protobuf-compiler
+cd /home/vscode
+curl -OL https://github.com/mobile-shell/mosh/releases/download/mosh-1.3.2.95rc1/mosh-1.3.2.95rc1.tar.gz
+tar -C /usr/local -xzf mosh-1.3.2.95rc1.tar.gz    
+rm mosh-1.3.2.95rc1.tar.gz                        
+cd mosh-1.3.2.95rc1/                                   
+./configure && make && sudo make install
+echo "done"
+
 echo "Installing clj-kondo...\n"
 cd /usr/local
 sudo curl -sLO https://raw.githubusercontent.com/clj-kondo/clj-kondo/master/script/install-clj-kondo
@@ -38,20 +49,29 @@ sudo chmod +x install-clj-kondo
 sudo ./install-clj-kondo
 echo "done"
 
-echo "Installing tmux+neovim+conjure...\n"
+echo "installing lsp-clojure...\n"
+sudo curl -OL https://github.com/clojure-lsp/clojure-lsp/releases/download/2022.09.01-15.27.31/clojure-lsp-native-linux-amd64.zip
+sudo unzip clojure-lsp-native-linux-amd64.zip -d /usr/local/bin          
+sudo rm clojure-lsp-native-linux-amd64.zip             
+echo "done"
+
+# Install latest neovim to play nice with Treesitter
+echo "installing neovim...\n"
+sudo curl -OL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+sudo tar -C /usr/local/bin -xzvf nvim-linux64.tar.gz
+sudo rm nvim-linux64.tar.gz
+echo "done"
+
+echo "Installing conjure...\n"
 cd /home/vscode
-sudo apt-get install -y tmux neovim python3-pip
-# Set nvim as the default vim command
-sudo update-alternatives --config vim
-pip3 install --upgrade msgpack
-sh -c 'curl -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-mkdir -p /home/vscode/.config/nvim
-cp "$dotfiledir"/scripts/init.vim /home/vscode/.config/nvim
+sudo apt-get install -y tmux ripgrep 
+git clone https://github.com/Olical/magic-kit.git ~/.config/nvim
+~/.config/nvim/script/sync.sh
+# todo: configure Treesitter
 echo "done"
 
 echo "Installing Acme...\n"
-sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev mosh
+sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev
 cd /usr/local
 sudo git clone https://github.com/9fans/plan9port plan9
 cd plan9
