@@ -58,8 +58,9 @@ echo "done"
 
 # Install latest neovim to play nice with Treesitter
 echo "installing neovim...\n"
+cd /home/vscode
 curl -OL https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb
-sudo apt install ./nvim-linux64.deb
+sudo apt-get install ./nvim-linux64.deb
 rm nvim-linux64.deb
 echo "done"
 
