@@ -62,12 +62,15 @@ sudo tar -C /usr/local/bin -xzvf nvim-linux64.tar.gz
 sudo rm nvim-linux64.tar.gz
 echo "done"
 
-echo "Installing conjure...\n"
+echo "Setup neovim as clojure IDE...\n"
 cd /home/vscode
 sudo apt-get install -y tmux ripgrep 
-git clone https://github.com/Olical/magic-kit.git ~/.config/nvim
+git clone https://github.com/Olical/magic-kit.git home/vscode/.config/nvim
+cd /home/vscode/.config/nvim/fnl/magic/plugin
+curl -OL https://raw.githubusercontent.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/main/.config/nvim/fnl/magic/plugin/treesitter.fnl
+cd ..
+sed -i '$i\  nvim-treesitter/nvim-treesitter {:mod treesitter :run ":TSUpdate"}' init.fnl
 ~/.config/nvim/script/sync.sh
-# todo: configure Treesitter
 echo "done"
 
 echo "Installing Acme...\n"
