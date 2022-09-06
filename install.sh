@@ -65,7 +65,7 @@ echo "done"
 echo "Setup neovim as clojure IDE...\n"
 cd /home/vscode
 sudo apt-get install -y tmux ripgrep 
-git clone https://github.com/Olical/magic-kit.git home/vscode/.config/nvim
+git clone https://github.com/Olical/magic-kit.git /home/vscode/.config/nvim
 cd /home/vscode/.config/nvim/fnl/magic/plugin
 curl -OL https://raw.githubusercontent.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/main/.config/nvim/fnl/magic/plugin/treesitter.fnl
 cd ..
