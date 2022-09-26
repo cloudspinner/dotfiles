@@ -77,10 +77,11 @@ echo "done"
 
 echo "Installing emacs...\n"
 cd /home/vscode
-curl -L http://emacs.ganneff.de/apt.key | sudo apt-key add -
-sudo add-apt-repository "deb http://emacs.ganneff.de/ buster main"
-sudo apt-get update
-sudo apt-get install -y emacs-snapshot fd-find
+# curl -L http://emacs.ganneff.de/apt.key | sudo apt-key add -
+# sudo add-apt-repository "deb http://emacs.ganneff.de/ buster main"
+# sudo apt-get update
+# sudo apt-get install -y emacs-snapshot fd-find
+sudo apt-get install -y emacs fd-find
 git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
 /home/vscode/.emacs.d/bin/doom install --force
 echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
