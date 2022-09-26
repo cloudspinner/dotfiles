@@ -72,8 +72,23 @@ cd /home/vscode/.config/nvim/fnl/magic/plugin
 curl -OL https://raw.githubusercontent.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/main/.config/nvim/fnl/config/plugin/treesitter.fnl
 cd ..
 sed -i '$i\  nvim-treesitter/nvim-treesitter {:mod treesitter :run ":TSUpdate"}' init.fnl
-~/.config/nvim/script/sync.sh
+/home/vscode/.config/nvim/script/sync.sh
 echo "done"
+
+echo "Installing emacs...\n"
+cd /home/vscode
+curl -L http://emacs.ganneff.de/apt.key | sudo apt-key add -
+sudo add-apt-repository "deb http://emacs.ganneff.de/ buster main"
+sudo apt-get update
+sudo apt-get install emacs-snapshot fd-find
+git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
+/home/vscode/.emacs.d/bin/doom install --force
+echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
+mkdir -p /home/vscode/.local/bin
+echo 'mkdir /tmp/emacs1000' >> /home/vscode/.local/bin/e
+echo 'chmod 700 /tmp/emacs1000/' >> /home/vscode/.local/bin/e
+echo 'emacsclient -c -a ""' >> /home/vscode/.local/bin/e
+chmod -u+x /home/vscode/.local/bin/e
 
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev
