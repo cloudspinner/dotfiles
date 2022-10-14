@@ -91,7 +91,7 @@ git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
 /home/vscode/.emacs.d/bin/doom install --force
 echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
 mkdir -p /home/vscode/.local/bin
-sed -i 's/;;lispy/lispy/g' /home/vscode/.doom.d/init.el 
+# sed -i 's/;;lispy/lispy/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;eshell/eshell/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;vterm/vterm/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;(spell +flyspell)/(spell +flyspell)/g' /home/vscode/.doom.d/init.el 
@@ -99,7 +99,8 @@ sed -i 's/;;lsp/lsp/g' /home/vscode/.doom.d/init.el
 sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el 
 echo 'mkdir /tmp/emacs1000' >> /home/vscode/.local/bin/e
 echo 'chmod 700 /tmp/emacs1000/' >> /home/vscode/.local/bin/e
-echo 'emacsclient -c -a ""' >> /home/vscode/.local/bin/e
+echo '# emacsclient -c -a ""' >> /home/vscode/.local/bin/e
+echo 'emacs' >> /home/vscode/.local/bin/e
 chmod +x /home/vscode/.local/bin/e
 
 echo "Installing Acme...\n"
