@@ -56,6 +56,11 @@ sudo unzip clojure-lsp-native-linux-amd64.zip -d /usr/local/bin
 sudo rm clojure-lsp-native-linux-amd64.zip             
 echo "done"
 
+# Install tmux
+echo "installing tmux...\n"
+sudo apt-get install -y tmux
+echo "set -g default-terminal \"screen-256color\"" > /home/vscode/.tmux.conf
+
 # Install latest neovim to play nice with Treesitter
 echo "installing neovim...\n"
 cd /home/vscode
@@ -66,7 +71,7 @@ echo "done"
 
 echo "Setup neovim as clojure IDE...\n"
 cd /home/vscode
-sudo apt-get install -y tmux ripgrep 
+sudo apt-get install -y ripgrep 
 git clone https://github.com/Olical/magic-kit.git /home/vscode/.config/nvim
 cd /home/vscode/.config/nvim/fnl/magic/plugin
 curl -OL https://raw.githubusercontent.com/rafaeldelboni/nvim-fennel-lsp-conjure-as-clojure-ide/main/.config/nvim/fnl/config/plugin/treesitter.fnl
