@@ -59,7 +59,14 @@ echo "done"
 # Install tmux
 echo "installing tmux...\n"
 sudo apt-get install -y tmux
-echo "set -g default-terminal \"screen-256color\"" > /home/vscode/.tmux.conf
+echo "set -g default-terminal \"screen-256color\"" >> /home/vscode/.tmux.conf
+echo "set -s escape-time 0" >> /home/vscode/.tmux.conf
+echo "set -g base-index 1" >> /home/vscode/.tmux.conf
+echo "bind-key C-\\ last-window" >> /home/vscode/.tmux.conf
+echo "" >> /home/vscode/.tmux.conf
+echo "# Change prefix to C-\\" >> /home/vscode/.tmux.conf
+echo "unbind C-b" >> /home/vscode/.tmux.conf
+echo "set-option -g prefix C-\\" >> /home/vscode/.tmux.conf
 
 # Install latest neovim to play nice with Treesitter
 echo "installing neovim...\n"
