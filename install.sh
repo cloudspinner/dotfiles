@@ -68,6 +68,7 @@ echo "# Change prefix to C-\\" >> /home/vscode/.tmux.conf
 echo "unbind C-b" >> /home/vscode/.tmux.conf
 echo "set-option -g prefix C-\\" >> /home/vscode/.tmux.conf
 
+<<neovim-comment
 # Install latest neovim to play nice with Treesitter
 echo "installing neovim...\n"
 cd /home/vscode
@@ -86,6 +87,8 @@ cd ..
 sed -i '$i\  nvim-treesitter/nvim-treesitter {:mod treesitter :run ":TSUpdate"}' init.fnl
 /home/vscode/.config/nvim/script/sync.sh
 echo "done"
+
+neovim-comment
 
 echo "Installing emacs...\n"
 cd /home/vscode
@@ -110,6 +113,7 @@ echo '# emacsclient -c -a ""' >> /home/vscode/.local/bin/e
 echo 'emacs' >> /home/vscode/.local/bin/e
 chmod +x /home/vscode/.local/bin/e
 
+<<acme-comment
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev
 cd /usr/local
@@ -159,5 +163,7 @@ curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceC
 echo "Updating font cache...\n"
 #sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
+
+acme-comment
 
 sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
