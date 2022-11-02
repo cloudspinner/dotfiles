@@ -23,9 +23,12 @@ sudo cp /usr/local/go/bin/tailscale /usr/bin/tailscale
 sudo mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 echo "done"
 
+<<vnc-comment
 echo "Installing VNC...\n"
 sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get script?
 echo "done"
+
+vnc-comment
 
 echo "Installing ssh...\n"
 curl -sSL https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/sshd-debian.sh | sudo bash -s -- 2222 $(whoami) true $SSH_PASSW
