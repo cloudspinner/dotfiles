@@ -13,12 +13,13 @@ vnc-comment
 
 # Build latest mosh release, to play nice with Neovim colors
 echo "Install mosh...\n"
-sudo apt-get install -y libtinfo-dev libssl-dev libprotobuf-dev protobuf-compiler
+sudo apt-get install -y libtinfo-dev libssl-dev libprotobuf-dev protobuf-compiler pkg-config
 cd /home/vscode
-curl -OL https://github.com/mobile-shell/mosh/releases/download/mosh-1.3.2.95rc1/mosh-1.3.2.95rc1.tar.gz
-tar -xzf mosh-1.3.2.95rc1.tar.gz    
-rm mosh-1.3.2.95rc1.tar.gz                        
-cd mosh-1.3.2.95rc1                              
+MOSH-FILE=mosh-1.4.0
+curl -OL https://mosh.org/${MOSH-FILE}.tar.gz
+tar -xzf ${MOSH-FILE}.tar.gz    
+rm ${MOSH-FILE}.tar.gz                        
+cd ${MOSH-FILE}                              
 ./configure && make && sudo make install
 make clean
 echo "done"
