@@ -101,7 +101,9 @@ cd /home/vscode
 # sudo apt-get install -y emacs-snapshot fd-find cmake libtool-bin
 sudo apt-get install -y emacs fd-find cmake libtool-bin
 git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
+echo "Installing Doom...\n"
 /home/vscode/.emacs.d/bin/doom install --force
+echo "Doom installed...\n"
 echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
 mkdir -p /home/vscode/.local/bin
 # sed -i 's/;;lispy/lispy/g' /home/vscode/.doom.d/init.el 
