@@ -124,8 +124,7 @@ sed -i 's/;;lsp/lsp/g' /home/vscode/.doom.d/init.el
 sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el 
 
 # Then synchronize Doom with your config:
-echo "Syncing Doom...\n"
-doom sync --force
+# doom sync
 
 # If you know Emacs won't be launched from your shell environment (e.g. you're
 # on macOS or use an app launcher that doesn't launch programs with the correct
