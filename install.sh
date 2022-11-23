@@ -110,9 +110,9 @@ mkdir /home/vscode/.doom.d  # or ~/.config/doom
 
 # The init.example.el file contains an example doom! call, which tells Doom what
 # modules to load and in what order.
-cp /home/vscode/.emacs.d/init.example.el /home/vscode/.doom.d/init.el
-cp /home/vscode/.emacs.d/core/templates/config.example.el /home/vscode/.doom.d/config.el
-cp /home/vscode/.emacs.d/core/templates/packages.example.el /home/vscode/.doom.d/packages.el
+cp /home/vscode/.emacs.d/templates/init.example.el /home/vscode/.doom.d/init.el
+cp /home/vscode/.emacs.d/templates/config.example.el /home/vscode/.doom.d/config.el
+cp /home/vscode/.emacs.d/templates/packages.example.el /home/vscode/.doom.d/packages.el
 
 # You might want to edit ~/.doom.d/init.el here and make sure you only have the
 # modules you want enabled.
