@@ -111,7 +111,7 @@ sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el
 # If you don't know whether you need this or not, there's no harm in doing it
 # anyway. `doom install` will have prompted you to generate one. If you
 # responded no, you can generate it later with the following command:
-doom env
+# doom env
 
 # Lastly, install the icon fonts Doom uses:
 emacs --batch -f all-the-icons-install-fonts
