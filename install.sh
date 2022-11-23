@@ -102,16 +102,47 @@ cd /home/vscode
 sudo apt-get install -y emacs fd-find cmake libtool-bin
 git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
 echo "Installing Doom...\n"
-/home/vscode/.emacs.d/bin/doom install --force --debug --verbose
-echo "Doom installed...\n"
-echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
-mkdir -p /home/vscode/.local/bin
+# So we don't have to write ~/.emacs.d/bin/doom every time
+PATH="/home/vscode/.emacs.d/bin:$PATH"
+
+# Create a directory for our private config
+mkdir /home/vscode/.doom.d  # or ~/.config/doom
+
+# The init.example.el file contains an example doom! call, which tells Doom what
+# modules to load and in what order.
+cp /home/vscode/.emacs.d/init.example.el /home/vscode/.doom.d/init.el
+cp /home/vscode/.emacs.d/core/templates/config.example.el /home/vscode/.doom.d/config.el
+cp /home/vscode/.emacs.d/core/templates/packages.example.el /home/vscode/.doom.d/packages.el
+
+# You might want to edit ~/.doom.d/init.el here and make sure you only have the
+# modules you want enabled.
 # sed -i 's/;;lispy/lispy/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;eshell/eshell/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;vterm/vterm/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;(spell +flyspell)/(spell +flyspell)/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;lsp/lsp/g' /home/vscode/.doom.d/init.el 
 sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el 
+
+# Then synchronize Doom with your config:
+doom sync
+
+# If you know Emacs won't be launched from your shell environment (e.g. you're
+# on macOS or use an app launcher that doesn't launch programs with the correct
+# shell) then create an envvar file to ensure Doom correctly inherits your shell
+# environment.
+#
+# If you don't know whether you need this or not, there's no harm in doing it
+# anyway. `doom install` will have prompted you to generate one. If you
+# responded no, you can generate it later with the following command:
+doom env
+
+# Lastly, install the icon fonts Doom uses:
+emacs --batch -f all-the-icons-install-fonts
+# On Windows, `all-the-icons-install-fonts` will only download the fonts, you'll
+# have to install them by hand afterwards!
+
+echo 'export PATH=$HOME/.emacs.d/bin:$PATH' >> /home/vscode/.profile
+mkdir -p /home/vscode/.local/bin
 echo 'mkdir /tmp/emacs1000' >> /home/vscode/.local/bin/e
 echo 'chmod 700 /tmp/emacs1000/' >> /home/vscode/.local/bin/e
 echo '# emacsclient -c -a ""' >> /home/vscode/.local/bin/e
