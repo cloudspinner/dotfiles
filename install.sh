@@ -15,11 +15,11 @@ vnc-comment
 echo "Install mosh...\n"
 sudo apt-get install -y libtinfo-dev libssl-dev libprotobuf-dev protobuf-compiler pkg-config
 cd /home/vscode
-MOSH-FILE=mosh-1.4.0
-curl -OL https://mosh.org/${MOSH-FILE}.tar.gz
-tar -xzf ${MOSH-FILE}.tar.gz    
-rm ${MOSH-FILE}.tar.gz                        
-cd ${MOSH-FILE}                              
+MOSHFILE=mosh-1.4.0
+curl -OL https://mosh.org/${MOSHFILE}.tar.gz
+tar -xzf ${MOSHFILE}.tar.gz    
+rm ${MOSHFILE}.tar.gz                        
+cd ${MOSHFILE}                              
 ./configure && make && sudo make install
 make clean
 echo "done"
