@@ -2,6 +2,8 @@
 dotfiledir="$(dirname "$(realpath "$0")")"
 echo "dotfiles in $dotfiledir"
 
+sudo apt-get update
+
 <<vnc-comment
 echo "Installing VNC...\n"
 sudo bash "$dotfiledir"/scripts/desktop-lite-debian.sh # todo: use curl to get script?
