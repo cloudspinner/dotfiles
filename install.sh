@@ -99,7 +99,7 @@ cd /home/vscode
 # sudo add-apt-repository "deb http://emacs.ganneff.de/ buster main"
 # sudo apt-get update
 # sudo apt-get install -y emacs-snapshot fd-find cmake libtool-bin
-sudo apt-get install -y emacs fd-find cmake libtool-bin
+sudo apt-get install -y emacs fd-find cmake libtool-bin ripgrep
 git clone https://github.com/hlissner/doom-emacs /home/vscode/.emacs.d
 echo "Installing Doom...\n"
 # So we don't have to write ~/.emacs.d/bin/doom every time
