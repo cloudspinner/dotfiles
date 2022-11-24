@@ -179,5 +179,3 @@ echo "Updating font cache...\n"
 sudo fc-cache -f -v
 
 acme-comment
-
-sudo cp "$dotfiledir"/scripts/devcontainer-init.sh /etc/profile.d
