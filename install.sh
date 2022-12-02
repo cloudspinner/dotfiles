@@ -114,6 +114,13 @@ sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el
 # responded no, you can generate it later with the following command:
 # doom env
 
+cat << EOF >> /home/vscode/.doom.d/config.el
+(add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)                                                                                                              
+(add-hook 'emacs-lisp-mode-hook #'evil-paredit-mode)                                                                                                                
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)                                                                                                                 
+(add-hook 'clojure-mode-hook #'evil-paredit-mode) 
+EOF
+
 # Lastly, install the icon fonts Doom uses:
 emacs --batch -f all-the-icons-install-fonts
 # On Windows, `all-the-icons-install-fonts` will only download the fonts, you'll
