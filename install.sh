@@ -115,7 +115,7 @@ sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el
 # doom env
 
 cat << EOF >> /home/vscode/.doom.d/packages.el
-((package! evil-paredit)
+(package! evil-paredit)
 EOF
 
 cat << EOF >> /home/vscode/.doom.d/config.el
