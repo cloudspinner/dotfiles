@@ -114,6 +114,10 @@ sed -i 's/;;clojure/(clojure +lsp)/g' /home/vscode/.doom.d/init.el
 # responded no, you can generate it later with the following command:
 # doom env
 
+cat << EOF >> /home/vscode/.doom.d/packages.el
+((package! evil-paredit)
+EOF
+
 cat << EOF >> /home/vscode/.doom.d/config.el
 (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)                                                                                                              
 (add-hook 'emacs-lisp-mode-hook #'evil-paredit-mode)                                                                                                                
