@@ -4,12 +4,8 @@
 # characters on each side (default: 1).
 
 case $1 in
--n)	shift; charcnt=#$1; shift;;
+-n)	shift; charcnt=#$1;;
 "")	charcnt=#1;;
-esac
-
-case $* in
-"")	;;
 *)	echo "Usage: acmepa [-n num]" 1>&2; exit 1;;
 esac
 
