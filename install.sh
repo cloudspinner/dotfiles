@@ -124,7 +124,7 @@ cat << EOF >> /home/vscode/.doom.d/config.el
 (add-hook 'clojure-mode-hook #'enable-paredit-mode)                                                                                                                 
 (add-hook 'clojure-mode-hook #'evil-paredit-mode)
 (after! cider
-  (setq (setq cider-clojure-cli-aliases ":dev"))
+  (setq cider-clojure-cli-aliases ":dev"))
 EOF
 
 # Lastly, install the icon fonts Doom uses:
