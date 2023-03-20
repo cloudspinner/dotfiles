@@ -140,7 +140,6 @@ echo '# emacsclient -c -a ""' >> /home/vscode/.local/bin/e
 echo 'emacs' >> /home/vscode/.local/bin/e
 chmod +x /home/vscode/.local/bin/e
 
-<<acme-comment
 echo "Installing Acme...\n"
 sudo apt-get install -y libx11-dev libfreetype6-dev libfontconfig1-dev libxext-dev libxt-dev
 cd /usr/local
@@ -190,5 +189,3 @@ curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceC
 echo "Updating font cache...\n"
 #sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
-
-acme-comment
