@@ -189,3 +189,6 @@ curl -OL "https://github.com/adobe-fonts/source-code-pro/raw/release/TTF/SourceC
 echo "Updating font cache...\n"
 #sudo apt-get install -y fontconfig
 sudo fc-cache -f -v
+
+echo "Authenticating Tailscale...\n"
+sudo tailscale up --accept-routes
