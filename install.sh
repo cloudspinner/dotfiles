@@ -1,1 +1,1 @@
-nix run . switch
+nix run home-manager/master -- init --switch
