@@ -35,6 +35,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pkgs.mosh
+    pkgs.tmux
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -50,6 +52,17 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".tmux.conf".text = ''
+      set -g default-terminal "screen-256color" 
+      set -s escape-time 0
+      set -g base-index 1
+      bind-key C-\\ last-window
+
+      # Change prefix to C-\\
+      unbind C-b
+      set-option -g prefix C-\\
+    '';
   };
 
   # You can also manage environment variables but you will have to manually
