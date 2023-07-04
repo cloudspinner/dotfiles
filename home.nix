@@ -35,7 +35,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.mosh
     pkgs.tmux
   ];
 
