@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, doom-emacs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -36,6 +36,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.tmux
+    doom-emacs
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -62,6 +63,8 @@
       unbind C-b
       set-option -g prefix C-\\
     '';
+
+    ".doom.d".source = dotfiles/.doom.d;
   };
 
   # You can also manage environment variables but you will have to manually
