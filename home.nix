@@ -57,8 +57,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
-    ".config/doom".source = dotfiles/.config/doom;
   };
 
   # You can also manage environment variables but you will have to manually
@@ -113,6 +111,7 @@
     installDoomEmacs = lib.hm.dag.entryAfter ["installPackages"] ''
       if [ ! -d "$HOME/.config/emacs" ]; then
         $DRY_RUN_CMD ${lib.getExe pkgs.git} clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.config/emacs
+        $DRY_RUN_CMD ${lib.getExe pkgs.git} clone https://github.com/cloudspinner/doom-emacs-config $HOME/.config/emacs
       fi
     '';
   };
