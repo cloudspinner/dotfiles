@@ -37,6 +37,7 @@
     # '')
 
     # Doom Emacs dependencies:
+    pkgs.clj-kondo
     pkgs.ripgrep
 
     (pkgs.writeShellScriptBin "e" ''
