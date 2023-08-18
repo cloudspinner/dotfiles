@@ -42,6 +42,7 @@
     pkgs.clang
 
     # Clojure dependencies:
+    pkgs.clojure-lsp
     pkgs.clj-kondo
 
     (pkgs.writeShellScriptBin "e" ''
