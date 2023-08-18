@@ -38,7 +38,7 @@
 
     # Doom Emacs dependencies:
     pkgs.ripgrep
-    pkgs.fd
+    # pkgs.fd
     # pkgs.clang
 
     # Clojure dependencies:
