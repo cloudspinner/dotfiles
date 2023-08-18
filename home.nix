@@ -37,8 +37,12 @@
     # '')
 
     # Doom Emacs dependencies:
-    pkgs.clj-kondo
     pkgs.ripgrep
+    pkgs.fd
+    pkgs.clang
+
+    # Clojure dependencies:
+    pkgs.clj-kondo
 
     (pkgs.writeShellScriptBin "e" ''
       emacs
