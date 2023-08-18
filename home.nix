@@ -39,7 +39,7 @@
     # Doom Emacs dependencies:
     pkgs.ripgrep
     pkgs.fd
-    pkgs.clang
+    # pkgs.clang
 
     # Clojure dependencies:
     pkgs.clj-kondo
