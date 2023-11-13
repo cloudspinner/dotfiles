@@ -36,6 +36,13 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    ## Emacs itself
+    # pkgs.binutils       # native-comp needs 'as', provided by this
+    pkgs.cmake  # native-comp needs cmake
+    # 28.2 + native-comp
+    ((pkgs.emacsPackagesFor pkgs.emacsNativeComp).emacsWithPackages
+      (epkgs: [ epkgs.vterm ]))
+
     # Doom Emacs dependencies:
     pkgs.ripgrep
     pkgs.fd
@@ -91,8 +98,6 @@
       eval "$(direnv hook bash)"
     '';
   };
-
-  programs.emacs.enable = true;
 
   programs.git = {
     enable = true;
