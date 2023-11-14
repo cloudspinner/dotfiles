@@ -99,8 +99,17 @@
     '';
   };
 
+  programs.git = {
+    enable = true;
+    userName = "cloudspinner";
+    userEmail = "stijn.tastenhoye@gmail.com";
+  };
+
   programs.gh = {
     enable = true;
+    gitCredentialHelper = {
+      hosts = [ "https://github.com" "https://gist.github.com" ];
+    };
     settings = {
       git_protocol = "ssh";
     };
