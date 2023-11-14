@@ -52,7 +52,7 @@
     pkgs.clojure-lsp
 
     (pkgs.writeShellScriptBin "e" ''
-      emacs
+      emacsclient -t -a ""
     '')
   ];
 
