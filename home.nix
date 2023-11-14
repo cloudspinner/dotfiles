@@ -99,12 +99,6 @@
     '';
   };
 
-  programs.git = {
-    enable = true;
-    userName = "cloudspinner";
-    userEmail = "stijn.tastenhoye@gmail.com";
-  };
-
   programs.gh = {
     enable = true;
     settings = {
