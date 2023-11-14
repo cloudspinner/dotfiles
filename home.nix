@@ -105,6 +105,13 @@
     userEmail = "stijn.tastenhoye@gmail.com";
   };
 
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
