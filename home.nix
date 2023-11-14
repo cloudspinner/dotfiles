@@ -103,15 +103,16 @@
     enable = true;
     userName = "cloudspinner";
     userEmail = "stijn.tastenhoye@gmail.com";
+    extraConfig = {
+      url."git@github.com:".pushInsteadOf = "https://github.com/";
+      url."git@gist.github.com:".pushInsteadOf = "https://gist.github.com/";
+    };
   };
 
   programs.gh = {
     enable = true;
     gitCredentialHelper = {
       hosts = [ "https://github.com" "https://gist.github.com" ];
-    };
-    settings = {
-      git_protocol = "ssh";
     };
   };
 
