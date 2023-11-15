@@ -27,6 +27,8 @@
               username = "vscode";
               homeDirectory = "/home/vscode";
             };
+            # Use default Codespace credential helper (see /etc/gitconfig):
+            programs.gh.gitCredentialHelper.enable = false;
           }
         ];
 

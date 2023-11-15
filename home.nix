@@ -104,8 +104,8 @@
     userName = "cloudspinner";
     userEmail = "stijn.tastenhoye@gmail.com";
     extraConfig = {
-      url."git@github.com:".pushInsteadOf = "https://github.com/";
-      url."git@gist.github.com:".pushInsteadOf = "https://gist.github.com/";
+      url."git@github.com:".insteadOf = "https://github.com/";
+      url."git@gist.github.com:".insteadOf = "https://gist.github.com/";
     };
   };
 
