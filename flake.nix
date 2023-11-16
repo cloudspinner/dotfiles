@@ -27,6 +27,12 @@
               username = "vscode";
               homeDirectory = "/home/vscode";
             };
+            # GITHUB_TOKEN is used by Codespace for authentication,
+            # but also by gh auth login.
+            # Avoid clash (see https://github.com/cli/cli/issues/3799):
+            programs.bash.shellAliases = {
+              gh = "env -u GITHUB_TOKEN gh";
+            };
             # Use default Codespace credential helper (see /etc/gitconfig):
             programs.gh.gitCredentialHelper.enable = false;
           }
