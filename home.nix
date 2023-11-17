@@ -52,7 +52,7 @@
     pkgs.clojure-lsp
 
     (pkgs.writeShellScriptBin "e" ''
-      TERM=xterm-direct emacsclient -t -a ""
+      TERM=konsole-direct emacsclient -t -a ""
     '')
   ];
 
