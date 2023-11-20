@@ -52,7 +52,7 @@
     pkgs.clojure-lsp
 
     (pkgs.writeShellScriptBin "e" ''
-      TERM=konsole-direct emacsclient -t -a ""
+      env -u SSH_TTY TERM=konsole-direct emacsclient -t -a ""
     '')
   ];
 
