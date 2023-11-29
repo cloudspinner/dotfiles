@@ -94,7 +94,7 @@
   
   programs.bash = {
     enable = true;
-    bashrcExtra = ''
+    initExtra = ''
       eval "$(direnv hook bash)"
     '';
   };
