@@ -11,12 +11,19 @@
   };
 
   outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."vscode" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+    homeConfigurations = {
+      vscode-x86_64-linux = let
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        hm = import home-manager {
+          inherit pkgs;
+          inherit system;
+        };
+      in hm.lib.homeManagerConfiguration {
+	inherit pkgs;
+        system = system;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
@@ -40,6 +47,37 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+
+      };
+      
+      stijn-aarch64-linux = let
+        system = "aarch64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        hm = import home-manager {
+          inherit pkgs;
+          inherit system;
+        };
+      in hm.lib.homeManagerConfiguration {
+        inherit pkgs;
+        system = system;
+
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [
+          ./home.nix
+          {
+            home = {
+              username = "stijn";
+              homeDirectory = "/home/stijn";
+            };
+          }
+        ];
+
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
+
       };
     };
 }
