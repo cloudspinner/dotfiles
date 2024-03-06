@@ -1,5 +1,13 @@
 { config, pkgs, lib, ... }:
                 
+let
+  mosh = pkgs.mosh.overrideAttrs (oldAttrs: {
+    postInstall = oldAttrs.postInstall + ''
+      wrapProgram $out/bin/mosh-server \
+        --set LOCALE_ARCHIVE "${pkgs.glibcLocales}/lib/locale/locale-archive"
+    '';
+  });
+in
 {       
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -35,6 +43,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    mosh
 
     ## Emacs itself
     # pkgs.binutils       # native-comp needs 'as', provided by this
