@@ -148,6 +148,9 @@ in
       if [ ! -d "$HOME/.config/doom" ]; then
         $DRY_RUN_CMD ${lib.getExe pkgs.git} clone https://github.com/cloudspinner/doom-emacs-config $HOME/.config/doom
       fi
+      if [ ! -d "$HOME/.config/clojure" ]; then
+        $DRY_RUN_CMD ${lib.getExe pkgs.git} clone https://github.com/cloudspinner/clojure-config $HOME/.config/clojure
+      fi
     '';
   };
 }
