@@ -9,6 +9,16 @@ let
   });
 in
 {       
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  
+  # Use nodejs_20 to avoid C++20 template-id constructor build issues
+  nixpkgs.overlays = [
+    (final: prev: {
+      nodejs = prev.nodejs_20;
+    })
+  ];
+  
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   # EDIT: declare this in flake.nix to accomodate differnet users on differnt systems:
