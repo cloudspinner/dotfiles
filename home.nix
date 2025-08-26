@@ -55,6 +55,8 @@ in
     # '')
     mosh
 
+    pkgs.claude-code
+
     ## Emacs itself
     # pkgs.binutils       # native-comp needs 'as', provided by this
     pkgs.cmake  # native-comp needs cmake
@@ -68,6 +70,7 @@ in
     pkgs.clang
 
     # Clojure dependencies:
+    pkgs.clojure
     pkgs.clojure-lsp
 
     (pkgs.writeShellScriptBin "e" ''
