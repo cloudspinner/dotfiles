@@ -71,7 +71,8 @@ in
     pkgs.clojure-lsp
 
     (pkgs.writeShellScriptBin "e" ''
-      env -u SSH_TTY COLORTERM=truecolor emacsclient -t -a ""
+      SOCKET="/tmp/emacs$UID/server"
+      env -u SSH_TTY COLORTERM=truecolor emacsclient --socket-name="$SOCKET" -t -a ""
     '')
   ];
 
