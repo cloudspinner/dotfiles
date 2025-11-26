@@ -61,7 +61,7 @@ in
     # pkgs.binutils       # native-comp needs 'as', provided by this
     pkgs.cmake  # native-comp needs cmake
     # 28.2 + native-comp
-    ((pkgs.emacsPackagesFor pkgs.emacsNativeComp).emacsWithPackages
+    ((pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages
       (epkgs: [ epkgs.vterm ]))
 
     # Doom Emacs dependencies:
@@ -77,6 +77,12 @@ in
       SOCKET="/tmp/emacs$UID/server"
       env -u SSH_TTY COLORTERM=truecolor emacsclient --socket-name="$SOCKET" -t -a ""
     '')
+
+    pkgs.cloudflared
+    pkgs.oauth2-proxy
+
+    # Plan 9 tools (for Acme):
+    pkgs.plan9port
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -107,6 +113,7 @@ in
   home.sessionVariables = {
     # EDITOR = "emacs";
     XDG_CONFIG_HOME = "$HOME/.config";
+    PLAN9 = "${pkgs.plan9port}/plan9";
   };
   
   home.sessionPath = [
@@ -128,9 +135,9 @@ in
 
   programs.git = {
     enable = true;
-    userName = "cloudspinner";
-    userEmail = "stijn.tastenhoye@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "cloudspinner";
+      user.email = "stijn.tastenhoye@gmail.com";
       url."git@github.com:".insteadOf = "https://github.com/";
       url."git@gist.github.com:".insteadOf = "https://gist.github.com/";
     };
