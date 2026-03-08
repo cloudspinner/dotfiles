@@ -80,6 +80,7 @@ in
 
     pkgs.cloudflared
     pkgs.oauth2-proxy
+    pkgs.rclone
 
     # Plan 9 tools (for Acme):
     pkgs.plan9port
