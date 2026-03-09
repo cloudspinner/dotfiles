@@ -126,6 +126,13 @@ in
   
   programs.bash = {
     enable = true;
+    initExtra = ''
+      # Prevent Claude Code nested session false positives in Emacs vterm.
+      # See: https://github.com/anthropics/claude-agent-sdk-python/issues/573
+      if [ -n "$INSIDE_EMACS" ]; then
+        unset CLAUDECODE
+      fi
+    '';
   };
 
   programs.direnv = {
