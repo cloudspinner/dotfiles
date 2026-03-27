@@ -126,12 +126,27 @@ in
   
   programs.bash = {
     enable = true;
+    historySize = 50000;
+    historyFileSize = 50000;
+    historyControl = [ "erasedups" "ignorespace" ];
+    shellOptions = [ "histappend" "checkwinsize" "cdspell" "globstar" "autocd" ];
+    shellAliases = {
+      ls = "ls --color=auto";
+      ll = "ls -lAh";
+      grep = "grep --color=auto";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+    };
     initExtra = ''
       # Prevent Claude Code nested session false positives in Emacs vterm.
       # See: https://github.com/anthropics/claude-agent-sdk-python/issues/573
       if [ -n "$INSIDE_EMACS" ]; then
         unset CLAUDECODE
       fi
+
+      # Debian default prompt + git branch
+      source ${pkgs.git}/share/git/contrib/completion/git-prompt.sh
+      PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\$ '
     '';
   };
 
