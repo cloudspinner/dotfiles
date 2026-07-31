@@ -60,9 +60,9 @@ in
     ## Emacs itself
     # pkgs.binutils       # native-comp needs 'as', provided by this
     pkgs.cmake  # native-comp needs cmake
-    # 28.2 + native-comp
-    ((pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages
-      (epkgs: [ epkgs.vterm ]))
+    # 30.2 + native-comp. No epkgs needed: the terminal is now :term ghostel,
+    # which Doom installs via straight (it ships its own native module).
+    pkgs.emacs
 
     # Doom Emacs dependencies:
     pkgs.ripgrep
@@ -138,7 +138,8 @@ in
       "..." = "cd ../..";
     };
     initExtra = ''
-      # Prevent Claude Code nested session false positives in Emacs vterm.
+      # Prevent Claude Code nested session false positives in Emacs terminals
+      # (ghostel sets INSIDE_EMACS=ghostel, as vterm did before it).
       # See: https://github.com/anthropics/claude-agent-sdk-python/issues/573
       if [ -n "$INSIDE_EMACS" ]; then
         unset CLAUDECODE
