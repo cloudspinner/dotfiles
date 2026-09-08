@@ -8,7 +8,9 @@ let
     '';
   });
 in
-{       
+{
+  imports = [ ./chat-mcp-refresh.nix ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
@@ -81,6 +83,8 @@ in
     pkgs.cloudflared
     pkgs.oauth2-proxy
     pkgs.rclone
+
+    pkgs.google-cloud-sdk
 
     # Plan 9 tools (for Acme):
     pkgs.plan9port
