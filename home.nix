@@ -85,6 +85,7 @@ in
     pkgs.cloudflared
     pkgs.oauth2-proxy
     pkgs.rclone
+    pkgs.jq
 
     pkgs.google-cloud-sdk
 
