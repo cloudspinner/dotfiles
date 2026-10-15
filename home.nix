@@ -4,7 +4,8 @@ let
   mosh = pkgs.mosh.overrideAttrs (oldAttrs: {
     postInstall = oldAttrs.postInstall + ''
       wrapProgram $out/bin/mosh-server \
-        --set LOCALE_ARCHIVE "${pkgs.glibcLocales}/lib/locale/locale-archive"
+        --set LOCALE_ARCHIVE "${pkgs.glibcLocales}/lib/locale/locale-archive" \
+        --set-default MOSH_SERVER_NETWORK_TMOUT 2592000
     '';
   });
 in
@@ -74,6 +75,7 @@ in
     # Clojure dependencies:
     pkgs.clojure
     pkgs.clojure-lsp
+    pkgs.babashka
 
     (pkgs.writeShellScriptBin "e" ''
       SOCKET="/tmp/emacs$UID/server"
@@ -123,6 +125,7 @@ in
   
   home.sessionPath = [
     "$HOME/.config/emacs/bin"
+    "$HOME/.local/bin"
   ];
 
   # Let Home Manager install and manage itself.
@@ -180,13 +183,63 @@ in
 
   programs.tmux = {
     enable = true;
+    # Keep the socket in /tmp. With secureSocket, home-manager exports
+    # TMUX_TMPDIR=/run/user/$UID from hm-session-vars.sh, which only *login*
+    # shells source -- so `ssh host tmux ...` and an interactive login end up
+    # on different sockets and sessions appear to vanish.
+    secureSocket = false;
+    # Nord colours, matching Blink and Claude Code. Sourced directly rather than
+    # via programs.tmux.plugins: the plugin's nord.tmux is bash (BASH_SOURCE,
+    # [[ == ]]) but tmux run-shell uses /bin/sh, which is dash here, so it is a
+    # silent no-op. Sourcing nord.conf also skips the plugin's status-bar
+    # *content* (date/time segments), keeping our own "[#S]" status-left.
     baseIndex = 1;
     clock24 = true;
     escapeTime = 0;
     prefix = "C-\\\\";
-    terminal = "screen-256color";
+    # tmux-256color (not screen-256color) so truecolor survives into Emacs.
+    terminal = "tmux-256color";
+    # Scrollback is the only scrollback on a phone/iPad: Blink's own buffer
+    # stops at the tmux pane.
+    historyLimit = 50000;
+    mouse = true;
     extraConfig = ''
       bind-key C-\\ last-window
+
+      # Pass 24-bit colour through to clients that handle it (Blink does).
+      set -ga terminal-overrides ",*:RGB"
+
+      source-file ${pkgs.tmuxPlugins.nord}/share/tmux-plugins/nord/src/nord.conf
+
+      # The session name is effectively the tab label, and tmux's default
+      # status-left-length of 10 truncates anything past "[kan-test]".
+      set -g status-left-length 20
+
+      # With tmux as the session switcher rather than one session per Blink
+      # tab, killing the current session should move to another one, not throw
+      # the client out of tmux altogether.
+      set -g detach-on-destroy off
+
+      # Close window 2 of 5 and the rest close the gap, so window numbers stay
+      # in step with what the status bar shows (and with any Cmd+N bindings).
+      set -g renumber-windows on
+
+      # Let Claude Code's bell reach Blink, so a backgrounded tab can show it
+      # is waiting on you rather than you polling each one.
+      set -g visual-bell off
+      set -g bell-action any
+
+      # Claude Code specifics, the three settings everyone running it under
+      # tmux ends up needing:
+      #  - passthrough: tmux drops DCS-wrapped sequences by default, which kills
+      #    OSC 52 copy-to-iOS-clipboard (Blink handles OSC 52 natively) and
+      #    Claude Code's progress/notification sequences.
+      #  - extended keys: without these, Shift+Enter submits the prompt instead
+      #    of inserting a newline.
+      set -g allow-passthrough on
+      set -g set-clipboard external
+      set -s extended-keys on
+      set -as terminal-features "xterm*:extkeys"
     '';
   };
 
